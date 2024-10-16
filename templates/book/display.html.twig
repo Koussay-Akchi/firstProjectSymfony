@@ -28,8 +28,8 @@
                     </td>
                     <td>{{ book.pubdate|date('d-m-Y')}}</td>
                     <td>
-                        <a href="update">update</a>
-                        <a href="delete/{{ book.id }}">Delete</a>
+                        <a href="book/update">update</a>
+                        <a href="/delete/{{ book.id }}">Delete</a>
                     </td>
                 </tr>
             {% endfor %}

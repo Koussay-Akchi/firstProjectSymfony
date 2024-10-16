@@ -24,7 +24,8 @@ class Author
     /**
      * @var Collection<int, Book>
      */
-    #[ORM\OneToMany(targetEntity: Book::class, mappedBy: 'authorid')]
+    #[ORM\OneToMany(targetEntity: Book::class, mappedBy: 'authorid',
+    cascade: ["remove","persist"])]
     private Collection $books;
 
     public function __construct()
