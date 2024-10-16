@@ -1,0 +1,19 @@
+{# templates/service/showService.html.twig #}
+
+<h1>
+  Service: {{ name }}
+</h1>
+<p>
+  This page displays the details of the service named "{{ name }}".
+</p>
+{% set test = 'aaaa' %}
+<p>
+  {{ test }}
+</p>
+
+{% set numbers = range(1, 9) %}
+<ul>
+  {% for number in numbers %}
+    <li>{{ number }}</li>
+  {% endfor %}
+</ul>

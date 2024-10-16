@@ -1,0 +1,29 @@
+<h1> book list</h1>
+{{dump(books)}}
+
+<h1>Tableau</h1>
+  
+  <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>title</th>
+                <th>enabled</th>
+                <th>date</th>
+                <th>links</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.id }}</td>
+                    <td>{{ book.title}}</td>
+                    <td>{{ book.enabled }}</td>
+                    <td>
+                        <a href="/update">update</a>
+                        <a href="/delete/{{ book.id }}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>

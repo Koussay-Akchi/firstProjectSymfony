@@ -1,0 +1,28 @@
+<h1> author list</h1>
+{{dump(authors)}}
+
+<h1>Tableau</h1>
+  
+  <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>name</th>
+                <th>email</th>
+                <th>links</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for author in authors %}
+                <tr>
+                    <td>{{ author.id }}</td>
+                    <td>{{ author.username }}</td>
+                    <td>{{ author.email }}</td>
+                    <td>
+                        <a href="/update">update</a>
+                        <a href="/delete/{{ author.id }}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
