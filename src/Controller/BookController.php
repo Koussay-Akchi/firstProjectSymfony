@@ -36,6 +36,6 @@ class BookController extends AbstractController
 
         $em->remove($book);
         $em->flush();
-        return $this->redirectToRoute("app_display");
+        return $this->redirectToRoute("app_display_book");
     }
 }
