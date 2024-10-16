@@ -9,6 +9,7 @@
                 <th>ID</th>
                 <th>title</th>
                 <th>enabled</th>
+                <th>Author</th>
                 <th>date</th>
                 <th>links</th>
             </tr>
@@ -18,7 +19,14 @@
                 <tr>
                     <td>{{ book.id }}</td>
                     <td>{{ book.title}}</td>
-                    <td>{{ book.enabled }}</td>
+                    <td>{{ book.enabled ? "Yes" : "No" }}</td>
+                    <td>{% if book.authorid %}
+                        {{ book.authorid.username }}
+                    {% else %}
+                        Autheur inconnu
+                    {% endif %}
+                    </td>
+                    <td>{{ book.pubdate|date('d-m-Y')}}</td>
                     <td>
                         <a href="/update">update</a>
                         <a href="/delete/{{ book.id }}">Delete</a>
