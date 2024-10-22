@@ -45,16 +45,66 @@ class ServiceController extends AbstractController
         ]);
     }
 
+    #[Route('/show/{id}', name: 'show_author')]
+public function showAuthor(AuthorRepository $authorRepository, $id): Response
+{
+    $author = $authorRepository->find($id);
+
+    return $this->render('author/show.html.twig', [
+        'author' => $author,
+    ]);
+}
+
+#[Route('/show2/{id}', name: 'authorDetails')]
+    public function authorDetails(int $id): Response
+    {
+        $authors = [
+            ['id' => 1, 'picture' => '/images/Victor-Hugo.jpg', 'username' => 'Victor Hugo', 'email' => 'victor.hugo@gmail.com', 'nb_books' => 100],
+            ['id' => 2, 'picture' => '/images/william-shakespeare.jpg', 'username' => 'William Shakespeare', 'email' => 'william.shakespeare@gmail.com', 'nb_books' => 200],
+            ['id' => 3, 'picture' => '/images/Taha_Hussein.jpg', 'username' => 'Taha Hussein', 'email' => 'taha.hussein@gmail.com', 'nb_books' => 300],
+        ];
+
+        $author = null;
+        foreach ($authors as $a) {
+            if ($a['id'] == $id) {
+                $author = $a;
+                break;
+            }
+        }
+
+        return $this->render('author/show.html.twig', [
+            'author' => $author,
+        ]);
+    }
+
+
+    #[Route('/update/{id}', name: 'update_author')]
+public function updateAuthor(ManagerRegistry $doctrine, Request $request, AuthorRepository $rep, $id): Response
+{
+    $em = $doctrine->getManager();
+    $author = $rep->find($id);
+
+    if (!$author) {
+        throw $this->createNotFoundException('No author found for id ' . $id);
+    }
+
+    $form = $this->createForm(AuthorType::class, $author);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $em->flush();
+        return $this->redirectToRoute('app_display');
+    }
+
+    return $this->render('author/update.html.twig', [
+        'form' => $form->createView(),
+    ]);
+}
+
     #[Route('/delete/{id}', name:"delete")]
     public function delete(AuthorRepository $rep , $id, EntityManagerInterface $em): Response
     {
         $author = $rep->find($id);
-
-
-    if (!$author) {
-        $this->addFlash('error', 'Author not found');
-        return $this->redirectToRoute("app_display");
-    }
 
         $em->remove($author);
         $em->flush();
@@ -79,8 +129,6 @@ class ServiceController extends AbstractController
         return $this->render('author/add.html.twig', [
             'f' => $form
         ]);
-
-
     }
 
 }

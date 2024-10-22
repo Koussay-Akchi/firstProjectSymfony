@@ -11,7 +11,7 @@
                 <th>email</th>
                 <th>links</th>
             </tr>
-        </thead>
+        </thead> 
         <tbody>
             {% for author in authors %}
                 <tr>
@@ -19,7 +19,8 @@
                     <td>{{ author.username }}</td>
                     <td>{{ author.email }}</td>
                     <td>
-                        <a href="/update">update</a>
+                        <a href="/author/show/{{ author.id }}">View</a>
+                        <a href="/author/update/{{ author.id }}">Update</a>
                         <a href="/author/delete/{{ author.id }}">Delete</a>
                     </td>
                 </tr>

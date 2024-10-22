@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Author Details</title>
+</head>
+<body>
+    <h1>Author Details</h1>
+
+    <p><strong>ID:</strong> {{ author.id }}</p>
+    <p><strong>Name:</strong> {{ author.username }}</p>
+    <p><strong>email:</strong> {{ author.email }}</p>
+
+    <a href="{{ path('app_display') }}">Back to Author List</a>
+</body>
+</html>

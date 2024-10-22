@@ -4,9 +4,13 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\BookRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Form\BookType;
+use App\Entity\Book;
+use Doctrine\Persistence\ManagerRegistry;
 
 #[Route('book')]
 class BookController extends AbstractController
@@ -37,5 +41,25 @@ class BookController extends AbstractController
         $em->remove($book);
         $em->flush();
         return $this->redirectToRoute("app_display_book");
+    }
+
+    #[Route('/add', name:"add_book")]
+    public function addBook(ManagerRegistry $doctrine, Request $request): Response
+    {
+        $em = $doctrine->getManager();
+        $book = new book(); 
+        $form = $this->createForm(BookType::class, $book);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($book);
+            $em->flush();
+            
+        return $this->redirectToRoute("app_display_book");
+        
+        }
+
+        return $this->render('book/add.html.twig', [
+            'f' => $form
+        ]);
     }
 }
