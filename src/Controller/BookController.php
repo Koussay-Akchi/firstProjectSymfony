@@ -26,7 +26,7 @@ class BookController extends AbstractController
     #[Route('/display', name:"app_display_book")]
     public function displayBooks(BookRepository $rep): Response
     {
-
+        #$books = $entityManager->getRepository(Book::class)->findAll();
         $books = $rep->findAll();
         return $this->render('book/display.html.twig', [
             'books' => $books,

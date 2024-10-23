@@ -1,0 +1,20 @@
+<h1>Tableau shop</h1>
+  
+  <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>name</th>
+                <th>address</th>
+            </tr>
+        </thead> 
+        <tbody>
+            {% for shop in shops %}
+                <tr>
+                    <td>{{ shop.id }}</td>
+                    <td>{{ shop.name }}</td>
+                    <td>{{ shop.address }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
